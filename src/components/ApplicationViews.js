@@ -4,11 +4,11 @@ import AnimalList from "./animal/AnimalList"
 import AnimalDetail from "./animal/AnimalDetail"
 import AnimalForm from "./animal/AnimalForm"
 import LocationList from "./location/LocationList"
-import EmployeeList from "./employee/EmployeeList"
 import AnimalManager from "../modules/AnimalManager"
 import EmployeeManager from "../modules/EmployeeManager"
 import LocationManager from "../modules/LocationManager"
 import Login from "./auth/Login"
+import AnimalEdit from "./animal/AnimalEdit";
 import ResourceList from "./generic/ResourceList";
 
 import person from "./employee/person.png"
@@ -37,6 +37,11 @@ export default class ApplicationViews extends Component {
             animals: animals
         }))
 
+    editAnimal = animal => AnimalManager.editAndList(animal)
+        .then(animals => this.setState({
+            animals: animals
+        }))
+
     // Check if credentials are in local storage
     isAuthenticated = () => localStorage.getItem("credentials") !== null
 
@@ -51,10 +56,6 @@ export default class ApplicationViews extends Component {
             .then(() => {
                 this.setState(_state)
             })
-    }
-
-    deleteEmployee = () => {
-        alert("You're fired!!!!!")
     }
 
     render() {
@@ -76,6 +77,11 @@ export default class ApplicationViews extends Component {
                 }} />
                 <Route path="/animals/:animalId(\d+)" render={(props) => {
                     return <AnimalDetail {...props} deleteAnimal={this.deleteAnimal} animals={this.state.animals} />
+                }} />
+                <Route path="/animals/edit/:animalId(\d+)" render={(props) => {
+                    return <AnimalEdit {...props}
+                                        animals={this.state.animals}
+                                        editAnimal={this.editAnimal} />
                 }} />
                 <Route path="/animals/new" render={(props) => {
                     return <AnimalForm {...props} addAnimal={this.addAnimal} employees={this.state.employees} />

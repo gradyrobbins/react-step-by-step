@@ -45,5 +45,10 @@ export default Object.create(AbstractManager, {
         value: function (id) {
             return this.delete("animals", id).then(() => this.all())
         }
+    },
+    editAndList: {
+        value: function (animal) {
+            return this.edit("animals", animal).then(() => this.all())
+        }
     }
 })

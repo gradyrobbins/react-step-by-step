@@ -4,10 +4,12 @@ export default class DetailCard extends Component {
     render () {
         return (
             <React.Fragment>
-                <div key={this.props.resource.id} className="card">
-                    <div className="card-body">
-                        <h5 className="card-title">
-                            <img src={this.props.resourceImage} className={`${this.props.style}`} />
+                <div key={this.props.resource.id} className={`card card--${this.props.type}`}>
+                    <div className="card__body">
+                        <h5 className="card__title">
+                            <img alt={`Resource ${this.props.resource.id}`}
+                                 src={this.props.resourceImage}
+                                 className={`${this.props.style}`} />
                             {this.props.resource.name}
                         </h5>
                     </div>

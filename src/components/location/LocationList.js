@@ -10,8 +10,9 @@ export default class LocationList extends Component {
             <section className="locations">
             {
                 this.props.locations.map(location =>
-                    <DetailCard key={location.id} style="icon--building"
+                    <DetailCard key={location.id} style={`icon--building`}
                                 resource={location}
+                                type="location"
                                 resourceImage={building} />
                 )
             }
